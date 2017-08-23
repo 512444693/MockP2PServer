@@ -15,8 +15,4 @@ public class DataMsgBody extends ThreadMsgBody {
     public byte[] getData() {
         return data;
     }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
 }

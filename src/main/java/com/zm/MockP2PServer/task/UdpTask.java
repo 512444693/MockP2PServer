@@ -19,10 +19,12 @@ import java.net.SocketException;
  */
 public class UdpTask extends Task {
     private DatagramPacket packet;
+    private DatagramSocket socket;
     public UdpTask(int taskId, BasicThread thread, int time, Object arg) {
         super(taskId, thread, time);
         UdpMsgBody body = (UdpMsgBody) arg;
         packet = body.getPacket();
+        socket = body.getSocket();
     }
 
     @Override
@@ -30,18 +32,13 @@ public class UdpTask extends Task {
         if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             Log.log.debug("收到处理线程消息：" + new String(data));
-            DatagramSocket datagramSocket = null;
             try {
-                datagramSocket = new DatagramSocket();
-                datagramSocket.send(new DatagramPacket(
+                socket.send(new DatagramPacket(
                         data, data.length, packet.getAddress(), packet.getPort()
                 ));
             } catch (IOException e) {
                 Log.log.error(e.getMessage());
             } finally {
-                if (datagramSocket != null) {
-                    datagramSocket.close();
-                }
                 remove();
             }
         } else {

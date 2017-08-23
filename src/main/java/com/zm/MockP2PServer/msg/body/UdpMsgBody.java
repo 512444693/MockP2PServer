@@ -2,23 +2,27 @@ package com.zm.MockP2PServer.msg.body;
 
 import com.zm.frame.thread.msg.ThreadMsgBody;
 
+import javax.xml.crypto.Data;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 
 /**
  * Created by zhangmin on 2017/8/23.
  */
 public class UdpMsgBody extends ThreadMsgBody {
+    private DatagramSocket socket;
     private DatagramPacket packet;
 
     public DatagramPacket getPacket() {
         return packet;
     }
 
-    public void setPacket(DatagramPacket packet) {
-        this.packet = packet;
+    public DatagramSocket getSocket() {
+        return socket;
     }
 
-    public UdpMsgBody(DatagramPacket datagramPacket) {
+    public UdpMsgBody(DatagramPacket datagramPacket, DatagramSocket datagramSocket) {
         this.packet = datagramPacket;
+        this.socket = datagramSocket;
     }
 }

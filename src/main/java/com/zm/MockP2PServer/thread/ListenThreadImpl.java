@@ -44,7 +44,7 @@ public class ListenThreadImpl extends BasicThread {
                 while(true) {
                     datagramPacket = new DatagramPacket(new byte[4096], 4096);
                     datagramSocket.receive(datagramPacket);
-                    sendThreadMsgTo(MyDef.MSG_TYPE_UDP_CNT, new UdpMsgBody(datagramPacket), MyDef.THREAD_TYPE_REC_AND_SEND);
+                    sendThreadMsgTo(MyDef.MSG_TYPE_UDP_CNT, new UdpMsgBody(datagramPacket, datagramSocket), MyDef.THREAD_TYPE_REC_AND_SEND);
                 }
             } else {
             }

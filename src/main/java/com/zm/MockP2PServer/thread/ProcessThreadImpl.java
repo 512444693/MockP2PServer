@@ -5,7 +5,6 @@ import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import static com.zm.frame.log.Log.log;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.thread.BlockingThread;
-import com.zm.utils.BU;
 
 /**
  * Created by zhangmin on 2017/8/23.
