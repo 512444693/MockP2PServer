@@ -1,13 +1,11 @@
 package com.zm.MockP2PServer;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+
+import com.zm.MockP2PServer.server.MockP2PServer;
+
+public class App {
+    public static void main( String[] args ) {
+        MockP2PServer server = MockP2PServer.getInstance();
+        server.start(args);
     }
 }
