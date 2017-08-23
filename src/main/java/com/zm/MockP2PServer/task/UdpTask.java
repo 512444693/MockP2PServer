@@ -31,7 +31,7 @@ public class UdpTask extends Task {
     public void processMsg(ThreadMsg threadMsg) {
         if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
-            Log.log.debug("收到处理线程消息：" + new String(data));
+            //Log.log.debug("收到处理线程消息：" + new String(data));
             try {
                 socket.send(new DatagramPacket(
                         data, data.length, packet.getAddress(), packet.getPort()
@@ -39,7 +39,7 @@ public class UdpTask extends Task {
             } catch (IOException e) {
                 Log.log.error(e.getMessage());
             } finally {
-                remove();
+                removeSelfFromThread();
             }
         } else {
             Log.log.error("UdpTask 收到错误消息类型：" + threadMsg.msgType);
@@ -51,5 +51,10 @@ public class UdpTask extends Task {
         int len = packet.getLength();
         byte[] data = BU.subByte(packet.getData(), 0, len);
         sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

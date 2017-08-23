@@ -26,8 +26,7 @@ public class RecAndSendThreadImpl extends BlockingThread {
         ThreadMsgBody body = msg.msgBody;
         switch (msg.msgType) {
             case MyDef.MSG_TYPE_UDP_CNT:
-                Task task = addTask(MyDef.TASK_TYPE_UDP, 10, body);
-                task.init();
+                addTask(MyDef.TASK_TYPE_UDP, 10, body);
                 break;
             default:
                 super.processMsg(msg);
