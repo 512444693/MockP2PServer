@@ -11,10 +11,12 @@ public class MyDef {
     public static final String MOCK_FILE_PATH = "mock" + File.separator;
 
     // thread type
-    public static final int THREAD_TYPE_LISTEN = 1001;
-    public static final int THREAD_TYPE_REC_AND_SEND = 1002;
-    public static final int THREAD_TYPE_PROCESS = 1003;
-    public static final int THREAD_TYPE_CHECK = 1004;
+    public static final int THREAD_TYPE_LISTEN_UDP = 1001;
+    public static final int THREAD_TYPE_LISTEN_TCP = 1002;
+    public static final int THREAD_TYPE_REC_AND_SEND = 1003;
+    public static final int THREAD_TYPE_LONG_TCP_REC_AND_SEND = 1004;
+    public static final int THREAD_TYPE_PROCESS = 1005;
+    public static final int THREAD_TYPE_CHECK = 1006;
 
     // message type
     public static final int MSG_TYPE_UDP_CNT = 2001;
@@ -24,4 +26,6 @@ public class MyDef {
 
     // task type
     public static final int TASK_TYPE_UDP = 3001;
+    public static final int TASK_TYPE_TCP = 3002;
+    public static final int TASK_TYPE_LONG_TCP = 3003;
 }

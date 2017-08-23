@@ -47,11 +47,15 @@ public class MockP2PServer {
             log.error("Wrong port : " + portStr);
             exit();
         }
-        log.debug("init ok, connection type " + config.getCntType() + ", port " + config.getPort());
+        log.debug("Init ok, connection type " + config.getCntType() + ", port " + config.getPort());
 
         // init thread
         new MyClassFactory();
-        new MyThreadGroup(MyDef.THREAD_TYPE_LISTEN, 1, null);
+        if(config.getCntType() == ConnectionType.UDP) {
+            new MyThreadGroup(MyDef.THREAD_TYPE_LISTEN_UDP, 1, config.getPort());
+        } else {
+            new MyThreadGroup(MyDef.THREAD_TYPE_LISTEN_TCP, 1, config.getPort());
+        }
         new MyThreadGroup(MyDef.THREAD_TYPE_REC_AND_SEND, 1, null);
         new MyThreadGroup(MyDef.THREAD_TYPE_PROCESS, 1, null);
     }
