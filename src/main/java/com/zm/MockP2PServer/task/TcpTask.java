@@ -14,6 +14,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import static com.zm.MockP2PServer.common.MyDef.MAX_PACKET_SIZE;
 import static com.zm.frame.log.Log.log;
 
 public class TcpTask extends Task {
@@ -50,8 +51,10 @@ public class TcpTask extends Task {
 
     @Override
     public void init() {
+        log.debug("链接 " + socket.getInetAddress().getHostAddress() +
+                ":" + socket.getPort());
         try {
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[MAX_PACKET_SIZE];
             in = new BufferedInputStream(socket.getInputStream());
             int len = in.read(buffer);
             if (len > 0) {
@@ -69,6 +72,8 @@ public class TcpTask extends Task {
 
     @Override
     public void destroy() {
+        log.debug(socket.getInetAddress().getHostAddress() +
+                ":" + socket.getPort() + " 链接断开");
         try {
             if (in != null) {
                 in.close();

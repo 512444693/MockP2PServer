@@ -1,5 +1,6 @@
 package com.zm.MockP2PServer.thread;
 
+import com.zm.frame.log.Log;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.msg.ThreadMsgBody;
 import com.zm.frame.thread.thread.BlockingThread;
@@ -33,7 +34,8 @@ public class RecAndSendThreadImpl extends BlockingThread {
                 addTask(TASK_TYPE_TCP, 10, body);
                 break;
             default:
-                super.processMsg(msg);
+                //Log.log.debug("check task time out");
+                super.threadProcessMsg(msg);
         }
     }
 }

@@ -1,10 +1,11 @@
 package com.zm.MockP2PServer.thread;
 
-import com.zm.frame.thread.thread.BasicThread;
 
-public class LongTcpRecAndSendThreadImpl extends BasicThread {
-    public LongTcpRecAndSendThreadImpl(int threadType, int threadId) {
-        super(threadType, threadId);
+import com.zm.frame.thread.thread.NoBlockingThread;
+
+public class LongTcpRecAndSendThreadImpl extends NoBlockingThread {
+    public LongTcpRecAndSendThreadImpl(int threadType, int threadId, Object arg) {
+        super(threadType, threadId, (int) arg);
     }
 
     @Override
@@ -12,8 +13,9 @@ public class LongTcpRecAndSendThreadImpl extends BasicThread {
 
     }
 
+
     @Override
-    protected void process() {
+    protected void afterProcessMsg() {
 
     }
 }

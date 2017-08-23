@@ -25,10 +25,10 @@ public class ProcessThreadImpl extends BlockingThread {
             case MyDef.MSG_TYPE_REQ:
                 byte[] data = ((DataMsgBody)msg.msgBody).getData();
                 //log.debug("收到：\r\n" + new String(data));
-                replayThreadMsg(msg, MyDef.MSG_TYPE_REPLY, new DataMsgBody(data));
+                //replayThreadMsg(msg, MyDef.MSG_TYPE_REPLY, new DataMsgBody(data));
                 break;
             default:
-                log.error("处理线程收到错误消息：" + msg.msgType);
+                super.threadProcessMsg(msg);
         }
 
     }
