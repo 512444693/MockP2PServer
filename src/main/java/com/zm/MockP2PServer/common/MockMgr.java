@@ -1,6 +1,5 @@
 package com.zm.MockP2PServer.common;
 
-import com.zm.MockP2PServer.server.MockP2PServer;
 import static com.zm.frame.log.Log.log;
 
 import java.io.File;
@@ -9,7 +8,7 @@ import java.io.File;
  * Created by zhangmin on 2017/8/24.
  */
 public class MockMgr {
-    private String mockeFilePath = MyDef.MOCK_FILE_PATH;
+    private String mockeFilePath = D.MOCK_FILE_PATH;
     //private boolean matchAll = MockP2PServer.getInstance().getConfig().isMatchAll();
 
     public byte[] getResponse(byte[] data) {

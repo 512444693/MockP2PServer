@@ -1,6 +1,6 @@
 package com.zm.MockP2PServer.task;
 
-import com.zm.MockP2PServer.common.MyDef;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import com.zm.MockP2PServer.msg.body.TcpMsgBody;
 import com.zm.frame.thread.msg.ThreadMsg;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import static com.zm.MockP2PServer.common.MyDef.MAX_PACKET_SIZE;
+import static com.zm.MockP2PServer.common.D.MAX_PACKET_SIZE;
 import static com.zm.frame.log.Log.log;
 
 public class TcpTask extends Task {
@@ -33,7 +33,7 @@ public class TcpTask extends Task {
 
     @Override
     public void processMsg(ThreadMsg threadMsg) {
-        if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
+        if(threadMsg.msgType == D.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             if (data != null) {
                 send(data);
@@ -110,7 +110,7 @@ public class TcpTask extends Task {
         public void run() {
             byte[] data;
             if ((data = rec()) != null) {
-                sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+                sendThreadMsgTo(D.MSG_TYPE_REQ, new DataMsgBody(data), D.THREAD_TYPE_PROCESS);
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.zm.MockP2PServer.thread;
 
-import com.zm.MockP2PServer.common.MyDef;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.msg.body.TcpMsgBody;
 import com.zm.frame.thread.thread.BasicThread;
 
@@ -31,8 +31,8 @@ public class TcpListenThreadImpl extends BasicThread {
             serverSocket = new ServerSocket(port);
             while (true) {
                 socket = serverSocket.accept();
-                sendThreadMsgTo(MyDef.MSG_TYPE_TCP_CNT,
-                        new TcpMsgBody(socket), MyDef.THREAD_TYPE_REC_AND_SEND);
+                sendThreadMsgTo(D.MSG_TYPE_TCP_CNT,
+                        new TcpMsgBody(socket), D.THREAD_TYPE_REC_AND_SEND);
             }
         } catch (IOException e) {
             log.error(e.getMessage());

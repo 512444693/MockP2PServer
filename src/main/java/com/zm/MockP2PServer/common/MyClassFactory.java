@@ -8,9 +8,9 @@ import com.zm.frame.thread.server.ClassFactory;
 import com.zm.frame.thread.task.Task;
 import com.zm.frame.thread.thread.BasicThread;
 
-import static com.zm.MockP2PServer.common.MyDef.TASK_TYPE_LONG_TCP;
-import static com.zm.MockP2PServer.common.MyDef.TASK_TYPE_TCP;
-import static com.zm.MockP2PServer.common.MyDef.TASK_TYPE_UDP;
+import static com.zm.MockP2PServer.common.D.TASK_TYPE_LONG_TCP;
+import static com.zm.MockP2PServer.common.D.TASK_TYPE_TCP;
+import static com.zm.MockP2PServer.common.D.TASK_TYPE_UDP;
 
 /**
  * Created by zhangmin on 2017/8/23.
@@ -20,19 +20,19 @@ public class MyClassFactory extends ClassFactory {
     public BasicThread genThread(int threadType, int threadId, Object arg) {
         BasicThread ret = null;
         switch (threadType) {
-            case MyDef.THREAD_TYPE_LISTEN_UDP:
+            case D.THREAD_TYPE_LISTEN_UDP:
                 ret = new UdpListenThreadImpl(threadType, threadId, arg);
                 break;
-            case MyDef.THREAD_TYPE_LISTEN_TCP:
+            case D.THREAD_TYPE_LISTEN_TCP:
                 ret = new TcpListenThreadImpl(threadType, threadId, arg);
                 break;
-            case MyDef.THREAD_TYPE_REC_AND_SEND :
+            case D.THREAD_TYPE_REC_AND_SEND :
                 ret = new RecAndSendThreadImpl(threadType, threadId);
                 break;
-            case MyDef.THREAD_TYPE_PROCESS :
+            case D.THREAD_TYPE_PROCESS :
                 ret = new ProcessThreadImpl(threadType, threadId);
                 break;
-            case MyDef.THREAD_TYPE_ON_TIME:
+            case D.THREAD_TYPE_ON_TIME:
                 ret = new OnTimeThreadImpl(threadType, threadId, arg);
                 break;
         }

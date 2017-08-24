@@ -1,8 +1,7 @@
 package com.zm.MockP2PServer.thread;
 
-import com.zm.MockP2PServer.common.MyDef;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
-import static com.zm.frame.log.Log.log;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.thread.BlockingThread;
 
@@ -22,10 +21,10 @@ public class ProcessThreadImpl extends BlockingThread {
     @Override
     protected void threadProcessMsg(ThreadMsg msg) {
         switch(msg.msgType) {
-            case MyDef.MSG_TYPE_REQ:
+            case D.MSG_TYPE_REQ:
                 byte[] data = ((DataMsgBody)msg.msgBody).getData();
                 //log.debug("收到：\r\n" + new String(data));
-                replayThreadMsg(msg, MyDef.MSG_TYPE_REPLY, new DataMsgBody(data));
+                replayThreadMsg(msg, D.MSG_TYPE_REPLY, new DataMsgBody(data));
                 break;
             default:
                 super.threadProcessMsg(msg);

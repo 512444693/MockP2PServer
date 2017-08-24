@@ -1,12 +1,13 @@
 package com.zm.MockP2PServer.thread;
 
 import com.zm.MockP2PServer.common.ConnectionType;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.server.MockP2PServer;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.msg.ThreadMsgBody;
 import com.zm.frame.thread.thread.BlockingThread;
 
-import static com.zm.MockP2PServer.common.MyDef.*;
+import static com.zm.MockP2PServer.common.D.*;
 
 
 /**
@@ -38,7 +39,7 @@ public class RecAndSendThreadImpl extends BlockingThread {
                 if (cntType == ConnectionType.TCP) {
                     addTask(TASK_TYPE_TCP, 10, body);
                 } else if (cntType == ConnectionType.LONG_TCP) {
-                    addTask(TASK_TYPE_LONG_TCP, 10,body);
+                    addTask(TASK_TYPE_LONG_TCP, D.NONE,body);
                 }
                 break;
             default:

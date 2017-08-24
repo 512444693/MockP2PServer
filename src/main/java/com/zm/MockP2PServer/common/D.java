@@ -1,11 +1,12 @@
 package com.zm.MockP2PServer.common;
 
-import java.io.File;
+
+import com.zm.frame.conf.Definition;
 
 /**
  * Created by zhangmin on 2017/8/23.
  */
-public class MyDef {
+public class D extends Definition {
 
     // 存放收发包的目录
     public static final String MOCK_FILE_PATH = "mock";

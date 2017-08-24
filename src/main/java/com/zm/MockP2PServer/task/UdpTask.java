@@ -1,6 +1,6 @@
 package com.zm.MockP2PServer.task;
 
-import com.zm.MockP2PServer.common.MyDef;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import com.zm.MockP2PServer.msg.body.UdpMsgBody;
 import com.zm.frame.log.Log;
@@ -28,7 +28,7 @@ public class UdpTask extends Task {
 
     @Override
     public void processMsg(ThreadMsg threadMsg) {
-        if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
+        if(threadMsg.msgType == D.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             //Log.log.debug("收到处理线程消息：" + new String(data));
             try {
@@ -49,7 +49,7 @@ public class UdpTask extends Task {
     public void init() {
         int len = packet.getLength();
         byte[] data = BU.subByte(packet.getData(), 0, len);
-        sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+        sendThreadMsgTo(D.MSG_TYPE_REQ, new DataMsgBody(data), D.THREAD_TYPE_PROCESS);
     }
 
     @Override

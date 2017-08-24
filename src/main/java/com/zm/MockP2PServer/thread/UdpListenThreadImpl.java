@@ -1,13 +1,13 @@
 package com.zm.MockP2PServer.thread;
 
-import com.zm.MockP2PServer.common.MyDef;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.msg.body.UdpMsgBody;
 import com.zm.frame.thread.thread.BasicThread;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import static com.zm.MockP2PServer.common.MyDef.MAX_PACKET_SIZE;
+import static com.zm.MockP2PServer.common.D.MAX_PACKET_SIZE;
 import static com.zm.frame.log.Log.log;
 
 /**
@@ -35,8 +35,8 @@ public class UdpListenThreadImpl extends BasicThread {
             while(true) {
                 datagramPacket = new DatagramPacket(new byte[MAX_PACKET_SIZE], MAX_PACKET_SIZE);
                 datagramSocket.receive(datagramPacket);
-                sendThreadMsgTo(MyDef.MSG_TYPE_UDP_CNT, new UdpMsgBody(
-                        datagramPacket, datagramSocket), MyDef.THREAD_TYPE_REC_AND_SEND);
+                sendThreadMsgTo(D.MSG_TYPE_UDP_CNT, new UdpMsgBody(
+                        datagramPacket, datagramSocket), D.THREAD_TYPE_REC_AND_SEND);
             }
 
         } catch (Exception e) {

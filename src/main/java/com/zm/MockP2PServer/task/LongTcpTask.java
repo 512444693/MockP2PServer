@@ -1,6 +1,6 @@
 package com.zm.MockP2PServer.task;
 
-import com.zm.MockP2PServer.common.MyDef;
+import com.zm.MockP2PServer.common.D;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.thread.BasicThread;
@@ -26,7 +26,7 @@ public class LongTcpTask extends TcpTask {
 
     @Override
     public void processMsg(ThreadMsg threadMsg) {
-        if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
+        if(threadMsg.msgType == D.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             if (data != null) {
                 if (!send(data)) {//发送异常，关闭链接
@@ -64,7 +64,7 @@ public class LongTcpTask extends TcpTask {
                     } else if (BU.bytes2Hex(data).equals(pingValueStr)) {// 另一种长连接ping
                         send(pingRetValue);
                     } else {
-                        sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+                        sendThreadMsgTo(D.MSG_TYPE_REQ, new DataMsgBody(data), D.THREAD_TYPE_PROCESS);
                     }
                 } else { //接受数据异常，"收数据线程"退出
                     break;

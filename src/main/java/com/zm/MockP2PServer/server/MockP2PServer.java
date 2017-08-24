@@ -3,8 +3,7 @@ package com.zm.MockP2PServer.server;
 import com.zm.MockP2PServer.common.ConnectionType;
 import com.zm.MockP2PServer.common.MyClassFactory;
 import com.zm.MockP2PServer.common.MyConfig;
-import com.zm.MockP2PServer.common.MyDef;
-import com.zm.frame.conf.Definition;
+import com.zm.MockP2PServer.common.D;
 import com.zm.frame.thread.server.ThreadServer;
 import com.zm.frame.thread.thread.MyThreadGroup;
 
@@ -26,7 +25,7 @@ public class MockP2PServer {
 
         // init config
         try {
-            config = new MyConfig(Definition.CONFIGURATION_DIRECTORY_PATH + "conf.properties");
+            config = new MyConfig(D.CONFIGURATION_DIRECTORY_PATH + "conf.properties");
         } catch (IOException e) {
             log.error("读取配置文件失败" + e.getMessage());
             exit();
@@ -60,15 +59,15 @@ public class MockP2PServer {
         // init thread
         new MyClassFactory();
         if(config.getCntType() == ConnectionType.UDP) {
-            new MyThreadGroup(MyDef.THREAD_TYPE_LISTEN_UDP, 1, config.getPort());
+            new MyThreadGroup(D.THREAD_TYPE_LISTEN_UDP, 1, config.getPort());
         } else {
-            new MyThreadGroup(MyDef.THREAD_TYPE_LISTEN_TCP, 1, config.getPort());
+            new MyThreadGroup(D.THREAD_TYPE_LISTEN_TCP, 1, config.getPort());
         }
-        new MyThreadGroup(MyDef.THREAD_TYPE_REC_AND_SEND, 1, null);
-        new MyThreadGroup(MyDef.THREAD_TYPE_PROCESS, 1, null);
+        new MyThreadGroup(D.THREAD_TYPE_REC_AND_SEND, 1, null);
+        new MyThreadGroup(D.THREAD_TYPE_PROCESS, 1, null);
 
         //100ms处理一次
-        new MyThreadGroup(MyDef.THREAD_TYPE_ON_TIME, 1, 100);
+        new MyThreadGroup(D.THREAD_TYPE_ON_TIME, 1, 100);
     }
 
     public void exit() {
