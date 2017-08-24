@@ -29,9 +29,6 @@ public class MyClassFactory extends ClassFactory {
             case MyDef.THREAD_TYPE_REC_AND_SEND :
                 ret = new RecAndSendThreadImpl(threadType, threadId);
                 break;
-            case MyDef.THREAD_TYPE_LONG_TCP_REC_AND_SEND :
-                ret = new LongTcpRecAndSendThreadImpl(threadType, threadId, arg);
-                break;
             case MyDef.THREAD_TYPE_PROCESS :
                 ret = new ProcessThreadImpl(threadType, threadId);
                 break;

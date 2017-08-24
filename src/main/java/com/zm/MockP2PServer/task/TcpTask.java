@@ -18,9 +18,9 @@ import static com.zm.frame.log.Log.log;
 
 public class TcpTask extends Task {
 
-    private Socket socket;
-    BufferedInputStream in = null;
-    private BufferedOutputStream out = null;
+    protected Socket socket;
+    protected BufferedInputStream in = null;
+    protected BufferedOutputStream out = null;
 
     public TcpTask(int taskId, BasicThread thread, int time, Object arg) {
         super(taskId, thread, time);
@@ -34,6 +34,8 @@ public class TcpTask extends Task {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             //Log.log.debug("收到处理线程消息：" + new String(data));
             send(data);
+            //发送完成或异常都关闭链接
+            removeSelfFromThread();
         } else {
             log.error("TCPTask 收到错误消息类型：" + threadMsg.msgType);
         }
@@ -49,7 +51,7 @@ public class TcpTask extends Task {
         }
     }
 
-    private byte[] rec(){
+    protected byte[] rec(){
         byte[] buffer = new byte[MAX_PACKET_SIZE];
         byte[] data = null;
         try {
@@ -68,17 +70,16 @@ public class TcpTask extends Task {
         return data;
     }
 
-    private void send(byte[] data){
+    protected boolean send(byte[] data){
         try {
             out = new BufferedOutputStream(socket.getOutputStream());
             out.write(data);
             out.flush();
         } catch (IOException e) {
             log.error(e.getMessage());
-        } finally {
-            //发送完成或异常都关闭链接
-            removeSelfFromThread();
+            return false;
         }
+        return true;
     }
 
     @Override

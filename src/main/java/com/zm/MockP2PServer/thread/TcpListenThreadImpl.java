@@ -15,8 +15,6 @@ import static com.zm.frame.log.Log.log;
 public class TcpListenThreadImpl extends BasicThread {
 
     private int port;
-    private ConnectionType cntType =
-            MockP2PServer.getInstance().getConfig().getCntType();
 
     private ServerSocket serverSocket;
     private Socket socket;
@@ -35,11 +33,8 @@ public class TcpListenThreadImpl extends BasicThread {
             serverSocket = new ServerSocket(port);
             while (true) {
                 socket = serverSocket.accept();
-                int threadType = cntType == ConnectionType.TCP ?
-                        MyDef.THREAD_TYPE_REC_AND_SEND : MyDef.THREAD_TYPE_LONG_TCP_REC_AND_SEND;
-
                 sendThreadMsgTo(MyDef.MSG_TYPE_TCP_CNT,
-                        new TcpMsgBody(socket), threadType);
+                        new TcpMsgBody(socket), MyDef.THREAD_TYPE_REC_AND_SEND);
             }
         } catch (IOException e) {
             log.error(e.getMessage());

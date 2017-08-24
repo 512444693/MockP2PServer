@@ -1,5 +1,10 @@
 package com.zm.MockP2PServer.thread;
 
+import com.zm.MockP2PServer.common.ConnectionType;
+import com.zm.MockP2PServer.server.MockP2PServer;
+import static com.zm.frame.log.Log.log;
+
+import com.zm.frame.conf.Definition;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.msg.ThreadMsgBody;
 import com.zm.frame.thread.thread.BlockingThread;
@@ -12,6 +17,9 @@ import static com.zm.MockP2PServer.common.MyDef.*;
  */
 public class RecAndSendThreadImpl extends BlockingThread {
 
+    private ConnectionType cntType =
+            MockP2PServer.getInstance().getConfig().getCntType();
+
     public RecAndSendThreadImpl(int threadType, int threadId) {
         super(threadType, threadId);
     }
@@ -23,17 +31,20 @@ public class RecAndSendThreadImpl extends BlockingThread {
 
     @Override
     protected void threadProcessMsg(ThreadMsg msg) {
-        //Log.log.debug("收发线程的task数量：" + this.tasks.entrySet().size());
+        //log.debug("收发线程的task数量：" + this.tasks.entrySet().size());
         ThreadMsgBody body = msg.msgBody;
         switch (msg.msgType) {
             case MSG_TYPE_UDP_CNT:
                 addTask(TASK_TYPE_UDP, 10, body);
                 break;
             case MSG_TYPE_TCP_CNT:
-                addTask(TASK_TYPE_TCP, 10, body);
+                if (cntType == ConnectionType.TCP) {
+                    addTask(TASK_TYPE_TCP, 10, body);
+                } else if (cntType == ConnectionType.LONG_TCP) {
+                    addTask(TASK_TYPE_LONG_TCP, Definition.NONE,body);
+                }
                 break;
             default:
-                //Log.log.debug("check task time out");
                 super.threadProcessMsg(msg);
         }
     }

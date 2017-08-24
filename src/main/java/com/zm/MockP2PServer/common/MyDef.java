@@ -17,9 +17,8 @@ public class MyDef {
     public static final int THREAD_TYPE_LISTEN_UDP = 1001;
     public static final int THREAD_TYPE_LISTEN_TCP = 1002;
     public static final int THREAD_TYPE_REC_AND_SEND = 1003;
-    public static final int THREAD_TYPE_LONG_TCP_REC_AND_SEND = 1004;
-    public static final int THREAD_TYPE_PROCESS = 1005;
-    public static final int THREAD_TYPE_ON_TIME = 1006;
+    public static final int THREAD_TYPE_PROCESS = 1004;
+    public static final int THREAD_TYPE_ON_TIME = 1005;
 
     // message type
     public static final int MSG_TYPE_UDP_CNT = 2001;
