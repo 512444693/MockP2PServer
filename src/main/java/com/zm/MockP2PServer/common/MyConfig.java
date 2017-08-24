@@ -11,10 +11,12 @@ public class MyConfig extends Config {
     private int port;
     private ConnectionType cntType;
     private static int maxPacketSize;
+    private boolean matchAll;
 
     public MyConfig(String filePath) throws IOException {
         super(filePath);
         this.maxPacketSize = getInt("maxPacketSize");
+        this.matchAll = getBoolean("ifMatchAll");
     }
 
     public int getPort() {
@@ -35,5 +37,9 @@ public class MyConfig extends Config {
 
     public static int getMaxPacketSize() {
         return maxPacketSize;
+    }
+
+    public boolean isMatchAll() {
+        return matchAll;
     }
 }

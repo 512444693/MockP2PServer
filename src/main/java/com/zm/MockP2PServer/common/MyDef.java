@@ -8,7 +8,7 @@ import java.io.File;
 public class MyDef {
 
     // 存放收发包的目录
-    public static final String MOCK_FILE_PATH = "mock" + File.separator;
+    public static final String MOCK_FILE_PATH = "mock";
 
     //每次收包大小
     public static final int MAX_PACKET_SIZE = MyConfig.getMaxPacketSize();
