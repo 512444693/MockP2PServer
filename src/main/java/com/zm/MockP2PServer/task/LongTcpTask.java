@@ -23,8 +23,7 @@ public class LongTcpTask extends TcpTask {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             //Log.log.debug("收到处理线程消息：" + new String(data));
             if (!send(data)) {
-                //发送异常，结束“收数据线程”，关闭链接
-                thread.interrupt();//关闭链接后，收数据会异常，“收数据线程”会自己结束，其实不需要
+                //发送异常，关闭链接
                 removeSelfFromThread();
             }
         } else {
@@ -37,6 +36,12 @@ public class LongTcpTask extends TcpTask {
         super.init();//先收一次，再后来交给"收数据线程"
         thread = new Thread(new RecThread());
         thread.start();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        thread.interrupt();//关闭链接后，收数据会异常，“收数据线程”会自己结束，其实不需要interrupt()
     }
 
     //收数据线程
