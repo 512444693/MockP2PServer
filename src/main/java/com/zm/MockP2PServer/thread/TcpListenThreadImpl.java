@@ -1,9 +1,7 @@
 package com.zm.MockP2PServer.thread;
 
-import com.zm.MockP2PServer.common.ConnectionType;
 import com.zm.MockP2PServer.common.MyDef;
 import com.zm.MockP2PServer.msg.body.TcpMsgBody;
-import com.zm.MockP2PServer.server.MockP2PServer;
 import com.zm.frame.thread.thread.BasicThread;
 
 import java.io.IOException;

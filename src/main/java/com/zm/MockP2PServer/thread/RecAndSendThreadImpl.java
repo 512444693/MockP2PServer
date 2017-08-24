@@ -2,9 +2,6 @@ package com.zm.MockP2PServer.thread;
 
 import com.zm.MockP2PServer.common.ConnectionType;
 import com.zm.MockP2PServer.server.MockP2PServer;
-import static com.zm.frame.log.Log.log;
-
-import com.zm.frame.conf.Definition;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.msg.ThreadMsgBody;
 import com.zm.frame.thread.thread.BlockingThread;

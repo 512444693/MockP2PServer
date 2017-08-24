@@ -4,6 +4,7 @@ import com.zm.MockP2PServer.common.MyDef;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.thread.BasicThread;
+import com.zm.utils.BU;
 
 import static com.zm.frame.log.Log.log;
 
@@ -12,6 +13,12 @@ import static com.zm.frame.log.Log.log;
  */
 public class LongTcpTask extends TcpTask {
     private Thread thread = null;
+    private static final String pingInCommonStr =
+            "000000000000000000000000000000000000ffffffffffffffffffffffff00000000";
+    //某种长连接的ping值
+    private static final String pingValueStr = "ffff" + pingInCommonStr;
+    //该长连接ping回包
+    private static final byte[] pingRetValue = BU.hex2Bytes("fffe" + pingInCommonStr);
 
     public LongTcpTask(int taskId, BasicThread thread, int time, Object arg) {
         super(taskId, thread, time, arg);
@@ -51,7 +58,13 @@ public class LongTcpTask extends TcpTask {
             while(!Thread.currentThread().isInterrupted()) {
                 byte[] data;
                 if ((data = rec()) != null) {
-                    sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+                    if (BU.bytes2Hex(data).matches("^0{92}$")){// 长连接ping
+                        send(data);
+                    } else if (BU.bytes2Hex(data).equals(pingValueStr)) {// 另一种长连接ping
+                        send(pingRetValue);
+                    } else {
+                        sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+                    }
                 } else { //接受数据异常，"收数据线程"退出
                     break;
                 }
