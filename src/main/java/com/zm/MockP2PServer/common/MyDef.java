@@ -11,7 +11,7 @@ public class MyDef {
     public static final String MOCK_FILE_PATH = "mock" + File.separator;
 
     //每次收包大小
-    public static final int MAX_PACKET_SIZE = 4096;
+    public static final int MAX_PACKET_SIZE = MyConfig.getMaxPacketSize();
 
     // thread type
     public static final int THREAD_TYPE_LISTEN_UDP = 1001;

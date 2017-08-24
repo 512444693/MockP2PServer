@@ -4,8 +4,11 @@ import com.zm.MockP2PServer.common.ConnectionType;
 import com.zm.MockP2PServer.common.MyClassFactory;
 import com.zm.MockP2PServer.common.MyConfig;
 import com.zm.MockP2PServer.common.MyDef;
+import com.zm.frame.conf.Definition;
 import com.zm.frame.thread.server.ThreadServer;
 import com.zm.frame.thread.thread.MyThreadGroup;
+
+import java.io.IOException;
 
 import static com.zm.frame.log.Log.log;
 
@@ -22,7 +25,12 @@ public class MockP2PServer {
     public void init(String[] args) {
 
         // init config
-        config = new MyConfig();
+        try {
+            config = new MyConfig(Definition.CONFIGURATION_DIRECTORY_PATH + "conf.properties");
+        } catch (IOException e) {
+            log.error("读取配置文件失败" + e.getMessage());
+            exit();
+        }
         String cntTypeStr = "", portStr = "";
         if(args.length == 2) {
             cntTypeStr = args[0];
