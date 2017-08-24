@@ -3,7 +3,6 @@ package com.zm.MockP2PServer.task;
 import com.zm.MockP2PServer.common.MyDef;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import com.zm.MockP2PServer.msg.body.TcpMsgBody;
-import com.zm.frame.log.Log;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.task.Task;
 import com.zm.frame.thread.thread.BasicThread;
@@ -34,18 +33,9 @@ public class TcpTask extends Task {
         if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
             //Log.log.debug("收到处理线程消息：" + new String(data));
-            try {
-                //socket.send(new DatagramPacket(data, data.length, packet.getAddress(), packet.getPort()));
-                out = new BufferedOutputStream(socket.getOutputStream());
-                out.write(data);
-                out.flush();
-            } catch (IOException e) {
-                Log.log.error(e.getMessage());
-            } finally {
-                removeSelfFromThread();
-            }
+            send(data);
         } else {
-            Log.log.error("TCPTask 收到错误消息类型：" + threadMsg.msgType);
+            log.error("TCPTask 收到错误消息类型：" + threadMsg.msgType);
         }
     }
 
@@ -53,19 +43,40 @@ public class TcpTask extends Task {
     public void init() {
         log.debug("链接 " + socket.getInetAddress().getHostAddress() +
                 ":" + socket.getPort());
+        byte[] data = rec();
+        if (data != null) {
+            sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+        }
+    }
+
+    private byte[] rec(){
+        byte[] buffer = new byte[MAX_PACKET_SIZE];
+        byte[] data = null;
         try {
-            byte[] buffer = new byte[MAX_PACKET_SIZE];
             in = new BufferedInputStream(socket.getInputStream());
             int len = in.read(buffer);
             if (len > 0) {
-                byte[] data = BU.subByte(buffer, 0, len);
-                sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+                data = BU.subByte(buffer, 0, len);
             } else { // len < -1，链接被关闭，len == 0 ?
-                removeSelfFromThread();
+                throw new IOException("链接被关闭");
             }
-
         } catch (IOException e) {
             log.error(e.getMessage());
+            //接收数据异常关闭链接
+            removeSelfFromThread();
+        }
+        return data;
+    }
+
+    private void send(byte[] data){
+        try {
+            out = new BufferedOutputStream(socket.getOutputStream());
+            out.write(data);
+            out.flush();
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        } finally {
+            //发送完成或异常都关闭链接
             removeSelfFromThread();
         }
     }
