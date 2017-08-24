@@ -12,11 +12,14 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import static com.zm.MockP2PServer.common.MyDef.MAX_PACKET_SIZE;
 import static com.zm.frame.log.Log.log;
 
 public class TcpTask extends Task {
+
+    private static final ExecutorService es = Executors.newCachedThreadPool();
 
     protected Socket socket;
     protected BufferedInputStream in = null;
@@ -45,12 +48,10 @@ public class TcpTask extends Task {
     public void init() {
         log.debug("链接 " + socket.getInetAddress().getHostAddress() +
                 ":" + socket.getPort());
-        byte[] data = rec();
-        if (data != null) {
-            sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
-        }
+        es.execute(new RecThread());
     }
 
+    //接受数据异常，返回数据为null
     protected byte[] rec(){
         byte[] buffer = new byte[MAX_PACKET_SIZE];
         byte[] data = null;
@@ -70,6 +71,7 @@ public class TcpTask extends Task {
         return data;
     }
 
+    //发送数据异常，返回false
     protected boolean send(byte[] data){
         try {
             out = new BufferedOutputStream(socket.getOutputStream());
@@ -98,6 +100,17 @@ public class TcpTask extends Task {
             }
         } catch (IOException e) {
             log.error("关闭链接异常：" + e.getMessage());
+        }
+    }
+
+    //收数据线程
+    class RecThread implements Runnable {
+        @Override
+        public void run() {
+            byte[] data;
+            if ((data = rec()) != null) {
+                sendThreadMsgTo(MyDef.MSG_TYPE_REQ, new DataMsgBody(data), MyDef.THREAD_TYPE_PROCESS);
+            }
         }
     }
 }

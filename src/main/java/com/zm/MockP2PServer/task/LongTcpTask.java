@@ -40,7 +40,8 @@ public class LongTcpTask extends TcpTask {
 
     @Override
     public void init() {
-        super.init();//先收一次，再后来交给"收数据线程"
+        log.debug("链接 " + socket.getInetAddress().getHostAddress() +
+                ":" + socket.getPort());
         thread = new Thread(new RecThread());
         thread.start();
     }
