@@ -1,8 +1,6 @@
 package com.zm.MockP2PServer.msg.body;
 
 import com.zm.frame.thread.msg.ThreadMsgBody;
-
-import javax.xml.crypto.Data;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 

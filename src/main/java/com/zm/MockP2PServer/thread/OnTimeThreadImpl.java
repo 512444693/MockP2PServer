@@ -2,7 +2,6 @@ package com.zm.MockP2PServer.thread;
 
 import com.zm.MockP2PServer.common.MyDef;
 import com.zm.frame.conf.Definition;
-import com.zm.frame.log.Log;
 import com.zm.frame.thread.thread.NoBlockingThread;
 
 public class OnTimeThreadImpl extends NoBlockingThread {

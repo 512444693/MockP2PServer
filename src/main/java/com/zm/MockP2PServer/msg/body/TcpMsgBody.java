@@ -1,8 +1,6 @@
 package com.zm.MockP2PServer.msg.body;
 
 import com.zm.frame.thread.msg.ThreadMsgBody;
-
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TcpMsgBody extends ThreadMsgBody {

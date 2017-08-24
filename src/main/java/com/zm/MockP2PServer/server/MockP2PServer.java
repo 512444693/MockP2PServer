@@ -47,7 +47,7 @@ public class MockP2PServer {
             log.error("Wrong port : " + portStr);
             exit();
         }
-        log.debug("Init ok, connection type " + config.getCntType() + ", port " + config.getPort());
+        log.debug("Init ok, " + config.getCntType() + "/" + config.getPort());
 
         // init thread
         new MyClassFactory();

@@ -12,7 +12,6 @@ import com.zm.utils.BU;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
 
 /**
  * Created by zhangmin on 2017/8/23.

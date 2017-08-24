@@ -1,6 +1,5 @@
 package com.zm.MockP2PServer.thread;
 
-import com.zm.frame.log.Log;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.msg.ThreadMsgBody;
 import com.zm.frame.thread.thread.BlockingThread;
