@@ -28,10 +28,10 @@ public class LongTcpTask extends TcpTask {
     public void processMsg(ThreadMsg threadMsg) {
         if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
-            //Log.log.debug("收到处理线程消息：" + new String(data));
-            if (!send(data)) {
-                //发送异常，关闭链接
-                removeSelfFromThread();
+            if (data != null) {
+                if (!send(data)) {//发送异常，关闭链接
+                    removeSelfFromThread();
+                }
             }
         } else {
             log.error("TCPTask 收到错误消息类型：" + threadMsg.msgType);

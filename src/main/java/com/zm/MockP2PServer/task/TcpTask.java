@@ -35,8 +35,9 @@ public class TcpTask extends Task {
     public void processMsg(ThreadMsg threadMsg) {
         if(threadMsg.msgType == MyDef.MSG_TYPE_REPLY) {
             byte[] data = ((DataMsgBody)threadMsg.msgBody).getData();
-            //Log.log.debug("收到处理线程消息：" + new String(data));
-            send(data);
+            if (data != null) {
+                send(data);
+            }
             //发送完成或异常都关闭链接
             removeSelfFromThread();
         } else {
