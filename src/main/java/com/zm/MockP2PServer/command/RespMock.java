@@ -10,6 +10,7 @@ import static com.zm.frame.log.Log.log;
 public class RespMock extends BaseMock {
     private byte[] data;
     private String messageStr;
+    private boolean containSuper;
 
     public RespMock(String p2pStr, long lastModified) {
         super(p2pStr, lastModified);
@@ -22,11 +23,12 @@ public class RespMock extends BaseMock {
         Message msg = new Message(p2pStr);
         this.data = msg.encode();
         this.messageStr = msg.toString();
+        this.containSuper = p2pStr.contains("super");
     }
 
     public byte[] getData() {
         //如果有super，需要重新编码
-        if (this.getP2pStr().contains("super")) {
+        if (containSuper) {
             Message msg = new Message(this.getP2pStr());
             this.data = msg.encode();
             this.messageStr = msg.toString();
