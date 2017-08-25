@@ -35,7 +35,9 @@ h@ChannelID = super.ChannelID
 ```
 
 ## 使用
+```
 java MockP2PServer-1.0.0.jar [-t, -u, -l] port
 -t, TCP 默认，可以不写
 -u, UDP
 -l, 长连接
+```
