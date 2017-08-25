@@ -1,0 +1,61 @@
+[h]
+4@ProtocolVer = *
+4@SequenceNum = *
+4@BodyLen = *
+1@CmdId = 60
+
+[b]
+h@ChannelID = F9CD4097E492455689E4BDD2324D21C5C8E87E97
+
+---
+
+[h]
+4@ProtocolVer = *
+4@SequenceNum = *
+4@BodyLen = *
+1@CmdId = 61
+
+[b]
+1@result = 0
+h@ChannelID = super.ChannelID
+
+a@ChannelPlayPosList = 17
+8@KeyframePos = 100
+4@TimeSample = 1503387700
+8@KeyframePos = 101
+4@TimeSample = 1503387701
+8@KeyframePos = 202
+4@TimeSample = 1503387702
+8@KeyframePos = 303
+4@TimeSample = 1503387703
+8@KeyframePos = 404
+4@TimeSample = 1503387704
+8@KeyframePos = 505
+4@TimeSample = 1503387705
+8@KeyframePos = 606
+4@TimeSample = 1503387706
+8@KeyframePos = 707
+4@TimeSample = 1503387707
+8@KeyframePos = 808
+4@TimeSample = 1503387708
+8@KeyframePos = 909
+4@TimeSample = 1503387709
+8@KeyframePos = 1010
+4@TimeSample = 1503387710
+8@KeyframePos = 1111
+4@TimeSample = 1503387711
+8@KeyframePos = 1212
+4@TimeSample = 1503387712
+8@KeyframePos = 1313
+4@TimeSample = 1503387713
+8@KeyframePos = 1414
+4@TimeSample = 1503387714
+8@KeyframePos = 1515
+4@TimeSample = 1503387717
+8@KeyframePos = 1616
+4@TimeSample = 1503387717
+
+a@ChannelStateList = 1
+8@KeyframePos = 116
+4@TimeSample = 1503387716
+1@State = 98
