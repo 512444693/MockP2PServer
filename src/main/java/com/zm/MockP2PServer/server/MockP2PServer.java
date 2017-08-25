@@ -54,7 +54,7 @@ public class MockP2PServer {
             log.error("Wrong port : " + portStr);
             exit();
         }
-        log.debug("Init ok, " + config.getCntType() + "/" + config.getPort());
+        log.info("Init ok, " + config.getCntType() + "/" + config.getPort());
 
         // init thread
         new MyClassFactory();
@@ -67,11 +67,11 @@ public class MockP2PServer {
         new MyThreadGroup(D.THREAD_TYPE_PROCESS, 1, null);
 
         //100ms处理一次
-        new MyThreadGroup(D.THREAD_TYPE_ON_TIME, 1, 100);
+        new MyThreadGroup(D.THREAD_TYPE_ON_TIME, 1, 500);
     }
 
     public void exit() {
-        log.debug(
+        log.error(
                 "Usage:\r\n" +
                 "java MockP2PServer.jar [-t, -u, -l] port\r\n" +
                 "-t, TCP default\r\n" +

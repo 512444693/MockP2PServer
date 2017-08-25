@@ -1,6 +1,7 @@
 package com.zm.MockP2PServer.thread;
 
 import com.zm.MockP2PServer.common.D;
+import com.zm.MockP2PServer.common.MockMgr;
 import com.zm.MockP2PServer.msg.body.DataMsgBody;
 import com.zm.frame.thread.msg.ThreadMsg;
 import com.zm.frame.thread.thread.BlockingThread;
@@ -9,6 +10,9 @@ import com.zm.frame.thread.thread.BlockingThread;
  * Created by zhangmin on 2017/8/23.
  */
 public class ProcessThreadImpl extends BlockingThread {
+
+    private MockMgr mockMgr = MockMgr.getInstance();
+
     public ProcessThreadImpl(int threadType, int threadId) {
         super(threadType, threadId);
     }
@@ -24,7 +28,10 @@ public class ProcessThreadImpl extends BlockingThread {
             case D.MSG_TYPE_REQ:
                 byte[] data = ((DataMsgBody)msg.msgBody).getData();
                 //log.debug("收到：\r\n" + new String(data));
-                replayThreadMsg(msg, D.MSG_TYPE_REPLY, new DataMsgBody(data));
+                replayThreadMsg(msg, D.MSG_TYPE_REPLY, new DataMsgBody(mockMgr.getResponse(data)));
+                break;
+            case D.MSG_TYPE_CHECK_FILE:
+                mockMgr.readMockFileFromDir();
                 break;
             default:
                 super.threadProcessMsg(msg);

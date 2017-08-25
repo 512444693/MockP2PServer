@@ -26,6 +26,7 @@ public class D extends Definition {
     public static final int MSG_TYPE_TCP_CNT = 2002;
     public static final int MSG_TYPE_REQ = 2003;
     public static final int MSG_TYPE_REPLY = 2004;
+    public static final int MSG_TYPE_CHECK_FILE = 2005;
 
     // task type
     public static final int TASK_TYPE_UDP = 3001;
