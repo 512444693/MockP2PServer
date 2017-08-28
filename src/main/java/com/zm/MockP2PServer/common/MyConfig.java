@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class MyConfig extends Config {
     private int port;
-    private ConnectionType cntType;
+    private int connType;
     private static int maxPacketSize;
     private boolean matchAll;
     private int checkMockInterval;
@@ -29,12 +29,12 @@ public class MyConfig extends Config {
         this.port = port;
     }
 
-    public ConnectionType getCntType() {
-        return cntType;
+    public int getConnType() {
+        return connType;
     }
 
-    public void setCntType(ConnectionType cntType) {
-        this.cntType = cntType;
+    public void setConnType(int connType) {
+        this.connType = connType;
     }
 
     public static int getMaxPacketSize() {

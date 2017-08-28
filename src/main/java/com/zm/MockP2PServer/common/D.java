@@ -11,7 +11,7 @@ public class D extends Definition {
     // 存放收发包的目录
     public static final String MOCK_FILE_PATH = "mock";
 
-    //每次收包大小
+    // 每次收包大小
     public static final int MAX_PACKET_SIZE = MyConfig.getMaxPacketSize();
 
     // thread type
@@ -32,4 +32,9 @@ public class D extends Definition {
     public static final int TASK_TYPE_UDP = 3001;
     public static final int TASK_TYPE_TCP = 3002;
     public static final int TASK_TYPE_LONG_TCP = 3003;
+
+    // connection type
+    public static final int CONN_TCP = 401;
+    public static final int CONN_UDP = 402;
+    public static final int CONN_LONG_TCP = 403;
 }

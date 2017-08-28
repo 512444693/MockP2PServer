@@ -1,6 +1,5 @@
 package com.zm.MockP2PServer.server;
 
-import com.zm.MockP2PServer.common.ConnectionType;
 import com.zm.MockP2PServer.common.MyClassFactory;
 import com.zm.MockP2PServer.common.MyConfig;
 import com.zm.MockP2PServer.common.D;
@@ -41,9 +40,9 @@ public class MockP2PServer {
             exit();
         }
         switch (cntTypeStr) {
-            case "-l" : config.setCntType(ConnectionType.LONG_TCP); break;
-            case "-t" : config.setCntType(ConnectionType.TCP); break;
-            case "-u" : config.setCntType(ConnectionType.UDP); break;
+            case "-l" : config.setConnType(D.CONN_LONG_TCP); break;
+            case "-t" : config.setConnType(D.CONN_TCP); break;
+            case "-u" : config.setConnType(D.CONN_UDP); break;
             default:
                 log.error("Wrong connection type : " + cntTypeStr);
                 exit();
@@ -54,11 +53,11 @@ public class MockP2PServer {
             log.error("Wrong port : " + portStr);
             exit();
         }
-        log.info("Init ok, " + config.getCntType() + "/" + config.getPort());
+        log.info("Init ok, " + config.getConnType() + "/" + config.getPort());
 
         // init thread
         new MyClassFactory();
-        if(config.getCntType() == ConnectionType.UDP) {
+        if(config.getConnType() == D.CONN_UDP) {
             new MyThreadGroup(D.THREAD_TYPE_LISTEN_UDP, 1, config.getPort());
         } else {
             new MyThreadGroup(D.THREAD_TYPE_LISTEN_TCP, 1, config.getPort());
@@ -74,8 +73,8 @@ public class MockP2PServer {
         log.error(
                 "Usage:\r\n" +
                 "java MockP2PServer.jar [-t, -u, -l] port\r\n" +
-                "-t, TCP default\r\n" +
-                "-u, UDP \r\n" +
+                "-t, CONN_TCP default\r\n" +
+                "-u, CONN_UDP \r\n" +
                 "-l, 长连接"
         );
         System.exit(-1);
