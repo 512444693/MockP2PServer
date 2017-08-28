@@ -8,7 +8,7 @@ import com.zm.message.Message;
  */
 public class ReqMock extends BaseMock {
     private Message message;
-    private int comdId;
+    private int cmdId;
 
     public ReqMock(String p2pStr, long lastModified) {
         super(p2pStr, lastModified);
@@ -20,11 +20,11 @@ public class ReqMock extends BaseMock {
         log.debug("Req updated");
         this.message = new Message(p2pStr);
         message.encode();
-        this.comdId = message.getCmdID();
+        this.cmdId = message.getCmdID();
     }
 
-    public int getComdId() {
-        return comdId;
+    public int getCmdId() {
+        return cmdId;
     }
 
     public Message getMessage() {

@@ -19,10 +19,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Created by zhangmin on 2017/8/24.
  */
 public class MockMgr {
-    private String mockeFilePath = D.MOCK_FILE_PATH;
+    private String mockFilePath = D.MOCK_FILE_PATH;
     private boolean matchAll = MockP2PServer.getInstance().getConfig().isMatchAll();
-    //private String mockeFilePath = "d:\\mock";
-    //private boolean matchAll = false;
     private Map<String, MockFile> mockMap = new HashMap();
 
     private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
@@ -50,7 +48,7 @@ public class MockMgr {
             readLock.unlock();
             return respData;
         }
-        MockFile mockFile = null;
+        MockFile mockFile;
         Message recMsg = null;
         for (Map.Entry<String, MockFile> entry : mockMap.entrySet()) {
             mockFile = entry.getValue();
@@ -90,9 +88,9 @@ public class MockMgr {
     }
 
     public void readMockFileFromDir() {
-        File dir = new File(mockeFilePath);
+        File dir = new File(mockFilePath);
         if (!dir.isDirectory()) {
-            log.error(mockeFilePath + " not exist or is not a directory");
+            log.error(mockFilePath + " not exist or is not a directory");
             return;
         }
         File[] files = dir.listFiles();

@@ -28,15 +28,8 @@ public abstract class BaseMock {
         return p2pStr;
     }
 
-    public void setP2pStr(String p2pStr) {
-        this.p2pStr = p2pStr;
-    }
-
     public long getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(long lastModified) {
-        this.lastModified = lastModified;
-    }
 }

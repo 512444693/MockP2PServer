@@ -11,10 +11,10 @@ public class MockFile extends BaseMock{
 
     public MockFile(String p2pStr, long lastModified) {
         super(p2pStr, lastModified);
-        String[] strs = p2pStr.split("\\-{3,}");
-        if (strs.length == 2) {
-            this.req = new ReqMock(strs[0], lastModified);
-            this.resp = new RespMock(strs[1], lastModified);
+        String[] strings = p2pStr.split("\\-{3,}");
+        if (strings.length == 2) {
+            this.req = new ReqMock(strings[0], lastModified);
+            this.resp = new RespMock(strings[1], lastModified);
         } else {
             throw new IllegalArgumentException("创建MockFile失败，缺少请求包或回包");
         }
@@ -22,10 +22,10 @@ public class MockFile extends BaseMock{
 
     protected void update(String p2pStr) {
         //log.debug("Mock file updated");
-        String[] strs = p2pStr.split("\\-{3,}");
-        if (strs.length == 2) {
-            this.req.update(strs[0], this.getLastModified());
-            this.resp.update(strs[1], this.getLastModified());
+        String[] strings = p2pStr.split("\\-{3,}");
+        if (strings.length == 2) {
+            this.req.update(strings[0], this.getLastModified());
+            this.resp.update(strings[1], this.getLastModified());
         } else {
             throw new IllegalArgumentException("更新MockFile失败，缺少请求包或回包");
         }
@@ -40,7 +40,7 @@ public class MockFile extends BaseMock{
     }
 
     public int getCmdId() {
-        return req.getComdId();
+        return req.getCmdId();
     }
 
     public boolean matchAll(Message recMsg) {
