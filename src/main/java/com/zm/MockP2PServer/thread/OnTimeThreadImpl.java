@@ -1,12 +1,14 @@
 package com.zm.MockP2PServer.thread;
 
 import com.zm.MockP2PServer.common.D;
+import com.zm.MockP2PServer.server.MockP2PServer;
 import com.zm.frame.thread.thread.NoBlockingThread;
 
 public class OnTimeThreadImpl extends NoBlockingThread {
 
     private long lastCheckTaskTime = System.currentTimeMillis();
     private long lastReadMockFileTime = System.currentTimeMillis();
+    private int checkMockInterval = MockP2PServer.getInstance().getConfig().getCheckMockInterval();
 
     public OnTimeThreadImpl(int threadType, int threadId, Object arg) {
         super(threadType, threadId, (int) arg);
@@ -26,7 +28,7 @@ public class OnTimeThreadImpl extends NoBlockingThread {
             lastCheckTaskTime = timeNow;
         }
 
-        if ((timeNow - lastReadMockFileTime) >= (10 * 1000)) {
+        if ((timeNow - lastReadMockFileTime) >= (checkMockInterval * 1000)) {
             sendThreadMsgTo(D.MSG_TYPE_CHECK_FILE, null, D.THREAD_TYPE_PROCESS);
             lastReadMockFileTime = timeNow;
         }

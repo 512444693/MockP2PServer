@@ -12,11 +12,13 @@ public class MyConfig extends Config {
     private ConnectionType cntType;
     private static int maxPacketSize;
     private boolean matchAll;
+    private int checkMockInterval;
 
     public MyConfig(String filePath) throws IOException {
         super(filePath);
         this.maxPacketSize = getInt("maxPacketSize");
         this.matchAll = getBoolean("ifMatchAll");
+        this.checkMockInterval = getInt("checkMockInterval");
     }
 
     public int getPort() {
@@ -41,5 +43,9 @@ public class MyConfig extends Config {
 
     public boolean isMatchAll() {
         return matchAll;
+    }
+
+    public int getCheckMockInterval() {
+        return checkMockInterval;
     }
 }
