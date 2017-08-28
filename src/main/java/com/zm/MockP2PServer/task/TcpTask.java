@@ -61,8 +61,10 @@ public class TcpTask extends Task {
             int len = in.read(buffer);
             if (len > 0) {
                 data = BU.subByte(buffer, 0, len);
-            } else { // len < -1，链接被关闭，len == 0 ?
-                throw new IOException("链接被关闭");
+            } else if (len == -1) { // len < -1，链接被关闭，len == 0 ?
+                throw new IOException("链接被关闭：" + -1);
+            } else if (len == 0) {
+                throw  new IOException("链接被关闭：" + 0);
             }
         } catch (IOException e) {
             log.error(e.getMessage());
