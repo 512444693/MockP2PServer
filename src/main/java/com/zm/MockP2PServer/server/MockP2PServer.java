@@ -66,7 +66,7 @@ public class MockP2PServer {
         new MyThreadGroup(D.THREAD_TYPE_REC_AND_SEND, 1, null);
         new MyThreadGroup(D.THREAD_TYPE_PROCESS, 1, null);
 
-        //100ms处理一次
+        //500ms处理一次
         new MyThreadGroup(D.THREAD_TYPE_ON_TIME, 1, 500);
     }
 
