@@ -39,10 +39,11 @@ public class MockP2PServer {
         } else {
             exit();
         }
+        String connType = "";
         switch (cntTypeStr) {
-            case "-l" : config.setConnType(D.CONN_LONG_TCP); break;
-            case "-t" : config.setConnType(D.CONN_TCP); break;
-            case "-u" : config.setConnType(D.CONN_UDP); break;
+            case "-l" : config.setConnType(D.CONN_LONG_TCP); connType = "TCP长连接"; break;
+            case "-t" : config.setConnType(D.CONN_TCP); connType = "TCP"; break;
+            case "-u" : config.setConnType(D.CONN_UDP); connType = "UDP"; break;
             default:
                 log.error("Wrong connection type : " + cntTypeStr);
                 exit();
@@ -53,7 +54,8 @@ public class MockP2PServer {
             log.error("Wrong port : " + portStr);
             exit();
         }
-        log.info("Init ok, " + config.getConnType() + "/" + config.getPort());
+
+        log.info("Init ok, " + connType + "/" + config.getPort());
 
         // init thread
         new MyClassFactory();
