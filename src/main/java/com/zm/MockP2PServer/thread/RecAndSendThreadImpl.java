@@ -38,7 +38,7 @@ public class RecAndSendThreadImpl extends BlockingThread {
                 if (connType == D.CONN_TCP) {
                     addTask(TASK_TYPE_TCP, 10, body);
                 } else if (connType == D.CONN_LONG_TCP) {
-                    addTask(TASK_TYPE_LONG_TCP, D.NONE,body);
+                    addTask(TASK_TYPE_LONG_TCP, D.NONE, body);
                 }
                 break;
             default:
