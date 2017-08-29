@@ -14,7 +14,7 @@ import static com.zm.MockP2PServer.common.D.*;
  */
 public class RecAndSendThreadImpl extends BlockingThread {
 
-    private int cntType =
+    private int connType =
             MockP2PServer.getInstance().getConfig().getConnType();
 
     public RecAndSendThreadImpl(int threadType, int threadId) {
@@ -35,9 +35,9 @@ public class RecAndSendThreadImpl extends BlockingThread {
                 addTask(TASK_TYPE_UDP, 10, body);
                 break;
             case MSG_TYPE_TCP_CNT:
-                if (cntType == D.CONN_TCP) {
+                if (connType == D.CONN_TCP) {
                     addTask(TASK_TYPE_TCP, 10, body);
-                } else if (cntType == D.CONN_LONG_TCP) {
+                } else if (connType == D.CONN_LONG_TCP) {
                     addTask(TASK_TYPE_LONG_TCP, D.NONE,body);
                 }
                 break;
