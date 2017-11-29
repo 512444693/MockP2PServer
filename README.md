@@ -3,7 +3,7 @@
 2. 支持[完全匹配]和[只匹配cmdid] (修改conf.properties)
 3. 支持多线程
 4. 支持动态更改mock文件
-5. 支持更改日志级别 (修改conf.properties)
+5. 支持更改日志级别 (修改log4j.properties)
 
 ## mock文件
 1. 收包和回包之间用至少3个“-”区别
